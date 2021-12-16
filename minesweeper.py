@@ -1,18 +1,22 @@
 from Board import initialize_board, display_board
 from minesweeper_logic import player_move, game_status, map_reveal
 
+
 def print_board(board):
     board_as_str = display_board(board)
     print(board_as_str)
+
 
 def display_win(board):
     print_board(board)
     print("U WIN!")
 
+
 def display_lost(board, row, col):
     map_reveal(board, row, col)
     print_board(board)
     print("U LOST...")
+
 
 def play():
     board, bombs = initialize_board()
@@ -41,13 +45,14 @@ def play():
         # 1 - win, 0 ongoing, -1, lost
         status = game_status(board)
 
-        if (status == 1):
+        if status == 1:
             display_win(board)
             break
-        elif (status == -1):
+        elif status == -1:
             display_lost(board, row, col)
             break
 
     print("Thanks for playing!")
+
 
 play()

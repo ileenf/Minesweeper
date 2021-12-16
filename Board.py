@@ -1,8 +1,10 @@
 import random
 from Cell import Cell
 
+
 def in_bounds(row, col, rows, cols):
-    return row >= 0 and row < rows and col >= 0 and col < cols
+    return 0 <= row < rows and 0 <= col < cols
+
 
 def randomize_bombs(board):
     # generate random rows and cols for bombs
@@ -31,27 +33,29 @@ def randomize_bombs(board):
             cell.put_bomb()
 
             # add 1 bomb for each of 8 adjacent cells
-            for dr, dc in [[0,1], [0,-1], [1,0], [-1,0], [1,1], [1,-1], [-1,1], [-1,-1]]:
+            for dr, dc in [[0, 1], [0, -1], [1, 0], [-1, 0], [1, 1], [1, -1], [-1, 1], [-1, -1]]:
                 adj_row = dr + row
                 adj_col = dc + col
 
-                # modify board to increment num adjecent bombs
+                # modify board to increment num adjacent bombs
                 if in_bounds(adj_row, adj_col, len(board), len(board[0])):
                     adj_cell = board[adj_row][adj_col]
                     adj_cell.add_adjacent_bomb()
     return num_bombs
 
+
 def initialize_board():
     board = []
 
-    for i in range(10):
+    for _ in range(10):
         cell_row = []
-        for i in range(10):
+        for _ in range(10):
             cell_row.append(Cell())
         board.append(cell_row)
 
     bombs = randomize_bombs(board)
     return board, bombs
+
 
 def display_board(board):
     board_as_str = ''

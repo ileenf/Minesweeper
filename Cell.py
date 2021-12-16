@@ -25,7 +25,7 @@ class Cell:
         self.num_adjacent_bombs += 1
 
     def is_hidden(self):
-        return self.revealed == False
+        return not self.revealed
 
     def set_exploding_bomb(self):
         self.is_exploding_bomb = True

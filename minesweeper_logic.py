@@ -1,4 +1,6 @@
 from Board import in_bounds
+
+
 def reveal_cells(board, row, col):
     # reveal the cell and any adjacent cells until reaches cell next to bomb or edge of board
     cell_stack = [row, col]
@@ -21,16 +23,20 @@ def reveal_cells(board, row, col):
             if col - 1 >= 0 and board[row][col - 1].is_hidden() and not board[row][col - 1].get_flagged():
                 cell_stack.append(row)
                 cell_stack.append(col - 1)
-            if row - 1 >= 0 and col - 1 >= 0 and board[row - 1][col - 1].is_hidden() and not board[row - 1][col - 1].get_flagged():
+            if row - 1 >= 0 and col - 1 >= 0 and board[row - 1][col - 1].is_hidden() and not board[row - 1][
+                col - 1].get_flagged():
                 cell_stack.append(row - 1)
                 cell_stack.append(col - 1)
-            if row - 1 >= 0 and col + 1 < 10 and board[row - 1][col + 1].is_hidden() and not board[row - 1][col + 1].get_flagged():
+            if row - 1 >= 0 and col + 1 < 10 and board[row - 1][col + 1].is_hidden() and not board[row - 1][
+                col + 1].get_flagged():
                 cell_stack.append(row - 1)
                 cell_stack.append(col + 1)
-            if row + 1 < 10 and col - 1 >= 0 and board[row + 1][col - 1].is_hidden() and not board[row + 1][col - 1].get_flagged():
+            if row + 1 < 10 and col - 1 >= 0 and board[row + 1][col - 1].is_hidden() and not board[row + 1][
+                col - 1].get_flagged():
                 cell_stack.append(row + 1)
                 cell_stack.append(col - 1)
-            if row + 1 < 10 and col + 1 < 10 and board[row + 1][col + 1].is_hidden() and not board[row + 1][col + 1].get_flagged():
+            if row + 1 < 10 and col + 1 < 10 and board[row + 1][col + 1].is_hidden() and not board[row + 1][
+                col + 1].get_flagged():
                 cell_stack.append(row + 1)
                 cell_stack.append(col + 1)
 
@@ -65,6 +71,7 @@ def player_move(board, action, row, col):
 
     return 0
 
+
 def game_status(board):
     all_and_only_bombs_flagged = True
     for row in range(len(board)):
@@ -90,6 +97,7 @@ def game_status(board):
         # game ongoing
         return 0
 
+
 def map_reveal(board, row, col):
     # reveal all cells in board
     for r in range(len(board)):
@@ -100,4 +108,3 @@ def map_reveal(board, row, col):
             if r == row and c == col:
                 # set exploding bomb at row, col
                 cell.set_exploding_bomb()
-
