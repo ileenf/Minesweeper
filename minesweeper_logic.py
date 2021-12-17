@@ -11,34 +11,13 @@ def reveal_cells(board, row, col):
         if not board[row][col].get_flagged():
             board[row][col].reveal()
         if board[row][col].get_adjacent_bombs() == 0:
-            if row + 1 < 10 and board[row + 1][col].is_hidden() and not board[row + 1][col].get_flagged():
-                cell_stack.append(row + 1)
-                cell_stack.append(col)
-            if col + 1 < 10 and board[row][col + 1].is_hidden() and not board[row][col + 1].get_flagged():
-                cell_stack.append(row)
-                cell_stack.append(col + 1)
-            if row - 1 >= 0 and board[row - 1][col].is_hidden() and not board[row - 1][col].get_flagged():
-                cell_stack.append(row - 1)
-                cell_stack.append(col)
-            if col - 1 >= 0 and board[row][col - 1].is_hidden() and not board[row][col - 1].get_flagged():
-                cell_stack.append(row)
-                cell_stack.append(col - 1)
-            if row - 1 >= 0 and col - 1 >= 0 and board[row - 1][col - 1].is_hidden() and not board[row - 1][
-                col - 1].get_flagged():
-                cell_stack.append(row - 1)
-                cell_stack.append(col - 1)
-            if row - 1 >= 0 and col + 1 < 10 and board[row - 1][col + 1].is_hidden() and not board[row - 1][
-                col + 1].get_flagged():
-                cell_stack.append(row - 1)
-                cell_stack.append(col + 1)
-            if row + 1 < 10 and col - 1 >= 0 and board[row + 1][col - 1].is_hidden() and not board[row + 1][
-                col - 1].get_flagged():
-                cell_stack.append(row + 1)
-                cell_stack.append(col - 1)
-            if row + 1 < 10 and col + 1 < 10 and board[row + 1][col + 1].is_hidden() and not board[row + 1][
-                col + 1].get_flagged():
-                cell_stack.append(row + 1)
-                cell_stack.append(col + 1)
+            for dr, dc in [(0, 1), (1, 0), (-1, 0), (0, -1), (-1, 1), (1, -1), (-1, -1), (1, 1)]:
+                new_row = row + dr
+                new_col = col + dc
+
+                if in_bounds(new_row, new_col, len(board), len(board[0])) and board[new_row][new_col].is_hidden() and not board[new_row][new_col].get_flagged():
+                    cell_stack.append(new_row)
+                    cell_stack.append(new_col)
 
 
 def player_move(board, action, row, col):
