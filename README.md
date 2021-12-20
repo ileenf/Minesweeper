@@ -9,3 +9,4 @@ Inspired by coding an assembly version of Minesweeper using MIPS assembly for In
 * Catches user error when making an invalid move
 * Board display is simple and easily to read/use
 * Implemented algorithm that reveals adjacent cells when revealing a cell with no bomb or adjacent bombs
+* Counter that displays number of bombs left to flag
